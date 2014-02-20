@@ -1,5 +1,7 @@
 # extract-github
 
+[![Build Status](https://travis-ci.org/3rd-Eden/extract-github.png)](https://travis-ci.org/3rd-Eden/extract-github)
+
 Extract a valid github URL from a given object. We make the assumption that the
 given object follows a `package.json` format as used by npm.
 
