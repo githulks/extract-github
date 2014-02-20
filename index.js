@@ -46,10 +46,10 @@ function url(data, contains) {
  * @api public
  */
 function parse(data) {
-  var http = /github.com[\/|:]([^\/]+)\/([^\/]+)[.git|\/]?/mig
-    , githubio = /https?:\/\/(.*)\.github\.io\/([^\/]+)\/?/mig
-    , travisci = /travis-ci\.org\/(.*)\/(.*)\.png/mig
-    , type = type(data)
+  var http = /github.com[\/|:]([^\/]+)\/([^\/]+)[.git|\/]?/i
+    , githubio = /https?:\/\/([^\.]+)\.github\.io\/([^\/]+)\/?/i
+    , travisci = /travis-ci\.org\/(.*)\/(.*)\.png/i
+    , type = parse.type(data)
     , result;
 
   //
@@ -57,12 +57,10 @@ function parse(data) {
   // github URL or a simple path structure.
   //
   if ('string' === type) {
-    data = data.replace('.git', '');      // Remove trailing .git's
-
     if (
-         (result = http.exec(data))       // Regular Github URL.
-      || (result = githubio.exec(data))   // Github Pages URL.
-      || (result = travisci.exec(data))   // Travis-CI badges
+         (result = http.exec(data.replace('.git', '')))       // Regular Github URL.
+      || (result = githubio.exec(data))                       // Github Pages URL.
+      || (result = travisci.exec(data))                       // Travis-CI badges
     ) {
       return { user: result[1], repo: result[2] };
     } else if ((result = data.split('/')) && result.length === 2) {

@@ -2,8 +2,10 @@ describe('extract-github', function () {
   'use strict';
 
   var extract = require('../')
+    , path = require('path')
     , chai = require('chai')
-    , expect = chai.expect;
+    , expect = chai.expect
+    , fs = require('fs');
 
   it('exports as a function', function () {
     expect(extract).to.be.a('function');
@@ -58,6 +60,50 @@ describe('extract-github', function () {
 
     it('returns undefined on no match', function () {
       expect(extract.url('foo', 'bar')).to.equal(undefined);
+    });
+  });
+
+  describe('parse', function () {
+    it('extracts the url from the homepage', function () {
+      var github = extract({ homepage: 'http://github.com/3rd-Eden/extract-github/issues' });
+
+      expect(github.user).to.equal('3rd-Eden');
+      expect(github.repo).to.equal('extract-github');
+    });
+
+    it('extracts the url from the repository', function () {
+      var github = extract({ repository: { web: 'git://github.com:3rd-Eden/extract-github' }});
+
+      expect(github.user).to.equal('3rd-Eden');
+      expect(github.repo).to.equal('extract-github');
+    });
+
+    it('extracts the url from the bugs', function () {
+      var github = extract({ bugs: { url: 'http://github.com/3rd-Eden/extract-github/issues' }});
+
+      expect(github.user).to.equal('3rd-Eden');
+      expect(github.repo).to.equal('extract-github');
+    });
+
+    it('extracts the url from the README', function () {
+      var github = extract(fs.readFileSync(path.join(__dirname, '../README.md'), 'utf-8'));
+
+      expect(github.user).to.equal('3rd-Eden');
+      expect(github.repo).to.equal('extract-github');
+    });
+
+    it('extracts the url from Travis-CI', function () {
+      var github = extract('https://travis-ci.org/3rd-Eden/extract-github.png');
+
+      expect(github.user).to.equal('3rd-Eden');
+      expect(github.repo).to.equal('extract-github');
+    });
+
+    it('extracts github pages', function () {
+      var github = extract('http://3rd-eden.github.io/extract-github');
+
+      expect(github.user).to.equal('3rd-eden');
+      expect(github.repo).to.equal('extract-github');
     });
   });
 });
