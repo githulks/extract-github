@@ -27,7 +27,11 @@ function url(data, contains) {
   var type = parse.type(data)
     , match;
 
-  if ('string' === type && ~data.indexOf(contains)) return data;
+  if ('string' === type) {
+    if (!contains) return data;
+    else if (~data.indexOf(contains)) return data;
+  }
+
   if ('object' === type) {
     if ('url' in data && (match = url(data.url, contains))) return match;
     if ('web' in data && (match = url(data.web, contains))) return match;

@@ -61,6 +61,13 @@ describe('extract-github', function () {
     it('returns undefined on no match', function () {
       expect(extract.url('foo', 'bar')).to.equal(undefined);
     });
+
+    it('has optional string matching', function () {
+      expect(extract.url({ url: 'google.com', web: 'github.com'})).to.equal('google.com');
+      expect(extract.url('google.com')).to.equal('google.com');
+      expect(extract.url({ foo: 'foo' })).to.equal(undefined);
+      expect(extract.url({ url: {} })).to.equal(undefined);
+    });
   });
 
   describe('parse', function () {
