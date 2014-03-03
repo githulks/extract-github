@@ -99,6 +99,13 @@ describe('extract-github', function () {
       expect(github.repo).to.equal('extract-github');
     });
 
+    it('correctly parses the README', function () {
+      var github = extract('Code coverage reporting is available if _instrumented_ code is detected.  Currently only _instrumentation_ via [node-jscoverage](https://github.com/visionmedia/node-jscoverage) is supported.  When _instrumented_ code is detected and coverage reporting is enabled using any of the `--cover-plain`, `--cover-html`, or `--cover-json` options a code coverage map is generated.');
+
+      expect(github.user).to.equal('visionmedia');
+      expect(github.repo).to.equal('node-jscoverage');
+    });
+
     it('extracts the url from Travis-CI', function () {
       var github = extract('https://travis-ci.org/3rd-Eden/extract-github.png');
 

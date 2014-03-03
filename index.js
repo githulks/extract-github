@@ -50,8 +50,8 @@ function url(data, contains) {
  * @api public
  */
 function parse(data) {
-  var http = /github.com[\/|:]([^\/]+)\/([^\/]+)[.git|\/]?/i
-    , githubio = /https?:\/\/([^\.]+)\.github\.io\/([^\/]+)\/?/i
+  var http = /github.com[\/|:]([^\/]+)\/([^\/|\s|\)]+)[.git|\/]?/i
+    , githubio = /https?:\/\/([^\.]+)\.github\.io\/([^\/|\s|\)]+)\/?/i
     , travisci = /travis-ci\.org\/(.*)\/(.*)\.png/i
     , type = parse.type(data)
     , result;
