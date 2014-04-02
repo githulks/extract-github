@@ -67,11 +67,17 @@ function parse(data) {
       || (result = travisci.exec(data))                       // Travis-CI badges
     ) {
       return { user: result[1], repo: result[2] };
-    } else if ((result = data.split('/')) && result.length === 2) {
+    } else if (
+         (result = data.split('/'))                           // Split by /.
+      && result.length === 2                                  // Only 2 results.
+      && result.every(function every(value) {                 // Just user/repos.
+           return !/\s/.test(value);
+         })
+    ) {
       //
       // A simple user/repository based string
       //
-      return { user: result[0], repo: result[1] };
+      return { user: result[0].trim(), repo: result[1].trim() };
     }
   } else if ('object' === type) {
     //

@@ -7,6 +7,22 @@ describe('extract-github', function () {
     , expect = chai.expect
     , fs = require('fs');
 
+  //
+  // Expose the fixtures in a readable format.
+  //
+  var fixture = fs.readdirSync(
+    path.join(__dirname, 'fixture')
+  ).reduce(function reduced(memo, file) {
+    var name = file.slice(0, -3);
+
+    memo[name.replace('-', '_')] = memo[name] = fs.readFileSync(
+      path.join(__dirname, 'fixture', file),
+      'utf-8'
+    );
+
+    return memo;
+  }, {});
+
   it('exports as a function', function () {
     expect(extract).to.be.a('function');
   });
@@ -92,18 +108,24 @@ describe('extract-github', function () {
       expect(github.repo).to.equal('extract-github');
     });
 
-    it('extracts the url from the README', function () {
-      var github = extract(fs.readFileSync(path.join(__dirname, '../README.md'), 'utf-8'));
+    describe('README', function () {
+      it('extracts the url from the README', function () {
+        var github = extract(fs.readFileSync(path.join(__dirname, '../README.md'), 'utf-8'));
 
-      expect(github.user).to.equal('3rd-Eden');
-      expect(github.repo).to.equal('extract-github');
-    });
+        expect(github.user).to.equal('3rd-Eden');
+        expect(github.repo).to.equal('extract-github');
+      });
 
-    it('correctly parses the README', function () {
-      var github = extract('Code coverage reporting is available if _instrumented_ code is detected.  Currently only _instrumentation_ via [node-jscoverage](https://github.com/visionmedia/node-jscoverage) is supported.  When _instrumented_ code is detected and coverage reporting is enabled using any of the `--cover-plain`, `--cover-html`, or `--cover-json` options a code coverage map is generated.');
+      it('correctly parses node-jsconverage\'s README', function () {
+        var github = extract(fixture.node_jscoverage);
 
-      expect(github.user).to.equal('visionmedia');
-      expect(github.repo).to.equal('node-jscoverage');
+        expect(github.user).to.equal('visionmedia');
+        expect(github.repo).to.equal('node-jscoverage');
+      });
+
+      it('correctly parses assign\'s README', function () {
+        expect(extract(fixture.assign)).to.equal(undefined);
+      });
     });
 
     it('extracts the url from Travis-CI', function () {
