@@ -130,6 +130,7 @@ describe('extract-github', function () {
 
       it('correctly parses assign\'s README', function () {
         expect(extract(fixture.assign)).to.equal(undefined);
+        expect(extract({ readme: fixture.assign })).to.equal(undefined);
       });
     });
 
