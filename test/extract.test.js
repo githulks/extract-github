@@ -108,6 +108,11 @@ describe('extract-github', function () {
       expect(github.repo).to.equal('extract-github');
     });
 
+    it('can default to a username', function () {
+      var github = extract('3rd-Eden');
+      expect(github.user).to.equal('3rd-Eden');
+    });
+
     describe('README', function () {
       it('extracts the url from the README', function () {
         var github = extract(fs.readFileSync(path.join(__dirname, '../README.md'), 'utf-8'));

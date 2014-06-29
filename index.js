@@ -78,6 +78,8 @@ function parse(data) {
       // A simple user/repository based string
       //
       return { user: result[0].trim(), repo: result[1].trim() };
+    } else if (!~data.indexOf(' ')) {
+      return { user: data };
     }
   } else if ('object' === type) {
     //
