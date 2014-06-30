@@ -113,6 +113,14 @@ describe('extract-github', function () {
       expect(github.user).to.equal('3rd-Eden');
     });
 
+    it('can remove github from the url', function () {
+      var github = extract('http://github.com/3rd-Eden');
+      expect(github.user).to.equal('3rd-Eden');
+
+      github = extract('https://github.com/3rd-Eden');
+      expect(github.user).to.equal('3rd-Eden');
+    });
+
     describe('README', function () {
       it('extracts the url from the README', function () {
         var github = extract(fs.readFileSync(path.join(__dirname, '../README.md'), 'utf-8'));

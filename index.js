@@ -79,7 +79,7 @@ function parse(data) {
       //
       return { user: result[0].trim(), repo: result[1].trim() };
     } else if (!~data.indexOf(' ')) {
-      return { user: data };
+      return { user: data.replace(/(?:https?:\/\/)?github\.com\//, '') };
     }
   } else if ('object' === type) {
     //
