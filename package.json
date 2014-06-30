@@ -1,6 +1,6 @@
 {
   "name": "extract-github",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Extract the Github project / repository URL from a given object",
   "main": "index.js",
   "scripts": {
