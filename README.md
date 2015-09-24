@@ -1,5 +1,7 @@
 # extract-github
 
+[![Join the chat at https://gitter.im/3rd-Eden/extract-github](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/3rd-Eden/extract-github?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/3rd-Eden/extract-github.png)](https://travis-ci.org/3rd-Eden/extract-github)
 
 Extract a valid github URL from a given object. We make the assumption that the
