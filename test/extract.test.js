@@ -1,10 +1,9 @@
 describe('extract-github', function () {
   'use strict';
 
-  var extract = require('../')
+  var expect = require('assume')
+    , extract = require('../')
     , path = require('path')
-    , chai = require('chai')
-    , expect = chai.expect
     , fs = require('fs');
 
   //
@@ -89,6 +88,13 @@ describe('extract-github', function () {
   describe('parse', function () {
     it('extracts the url from the homepage', function () {
       var github = extract({ homepage: 'http://github.com/3rd-Eden/extract-github/issues' });
+
+      expect(github.user).to.equal('3rd-Eden');
+      expect(github.repo).to.equal('extract-github');
+    });
+
+    it('extracts from a private github enterprise url', function () {
+      var github = extract({ homepage: 'http://github.example.org/3rd-Eden/extract-github/issues' });
 
       expect(github.user).to.equal('3rd-Eden');
       expect(github.repo).to.equal('extract-github');
