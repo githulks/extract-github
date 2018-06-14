@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/3rd-Eden/extract-github",
   "devDependencies": {
-    "assume": "~1.5.0",
+    "assume": "~2.1.0",
     "mocha": "~3.4.0",
     "pre-commit": "~1.2.0"
   }
