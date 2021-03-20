@@ -7,7 +7,7 @@ given object follows a `package.json` format as used by npm.
 
 ## Installation
 
-This module is released in the npm registry as `extract-github` and can therefor
+This module is released in the npm registry as `extract-github` and can therefore
 be installed using:
 
 ```
@@ -17,7 +17,7 @@ npm install --save extract-github
 ## Usage
 
 This module was written to only do specific task and do that task well, and that
-is extracting github information. We therefor export as a single function:
+is extracting github information. We therefore export as a single function:
 
 ```js
 'use strict';
@@ -34,8 +34,8 @@ var github = extract(require('./package.json'));
 
 The `github` variable should now contain an object with a `user` and `repo`
 property which can be re-used to create a new github URL. In addition to parsing
-package.json's it also supports extracting github information out of `README` it
-can do this by extracting Travis-CI badges or just plain ol matching github URL
+package.json files it also supports extracting github information out of `README` it
+can do this by extracting Travis-CI badges or just plain by matching github URL
 from the content.
 
 ```js
