@@ -5,7 +5,7 @@ var toString = Object.prototype.toString;
 /**
  * Get accurate type information for the given JavaScript class.
  *
- * @param {Mixed} of The thing who's type class we want to figure out.
+ * @param {Mixed} of The thing whose type class we want to figure out.
  * @returns {String} lowercase variant of the name.
  * @api private
  */
@@ -98,7 +98,7 @@ function parse(data) {
     //
     // Still no result, attempt to parse out a Travis-CI badge from a README
     // property as the Travis-CI badges follow the same URL pattern as github
-    // root URL's so we can use this to re-construct a project URL.
+    // root URLs so we can use this to re-construct a project URL.
     //
     if ('string' === typeof data.readme) return parse(data.readme);
   }
